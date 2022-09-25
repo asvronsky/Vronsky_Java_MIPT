@@ -1,16 +1,30 @@
+import java.util.Arrays;
+
 public class Task1
 {
     //посчитать факториал числа n
     //0.5 балла - если посчитаете в цикле
     //1 балл - если посчитаете рекурсией
     public static int fact(int n){
-        return n;
+        if (n > 1)
+            return fact(n-1) * n;
+        else
+            return 1;
     }
 
     //вывести таблицу умножения на экран - 1 балл
     //подсказка - использовать двойной for
     public static void table(){
-        //Ваше решение здесь
+        int a;
+        int b;
+        for (a=1; a<=10; ++a)
+        {
+            for (b=1; b<=10; ++b)
+            {
+                System.out.printf("%4d", a * b);
+            }
+            System.out.println();
+        }
     }
 
     //посчитать сумму цифр числа
@@ -18,8 +32,14 @@ public class Task1
     //для любого числа - 1 балл
     //подсказка - в случае для любого числа используйте while
     public static int sum(int n){
-        //Ваше решение здесь
-        return n;
+        int digit, sum = 0;
+        while(n > 0)
+        {
+            digit = n % 10;
+            sum = sum + digit;
+            n = n / 10;
+        }
+        return sum;
     }
 
     //определить, является ли год високосным
@@ -30,8 +50,7 @@ public class Task1
     //Годы 2100, 2200 и 2300 - не високосные.
     //за правильный ответ - 0.5 балла
     public static boolean isLeapYear(int year) {
-        //Ваше решение здесь
-        return true;
+        return (year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0));
     }
 
     //здесь вам нужно будет использовать результат прошлой задачи
@@ -39,25 +58,32 @@ public class Task1
     //правильный ответ - 0.5 балла
     public static int daysInYear(int year) {
         if (isLeapYear(year)){
-            //
+            return 366;
         } else {
-            //
+            return 365;
         }
-        return 0;
     }
 
     //определить номер дня недели по строке
     //например: Понедельник - 1
     //правильный ответ - 1 балл
     public static int dayOfTheWeek(String n){
-        //Ваше решение здесь
-        return 0;
+        switch (n) {
+            case "Понедельник": return 1;
+            case "Вторник": return 2;
+            case "Среда": return 3;
+            case "Четверг": return 4;
+            case "Пятница": return 5;
+            case "Суббота": return 6;
+            case "Воскресенье": return 7;
+            default: return -1;
+        }
     }
 
     //вывести массив на экран в виде: [1, 5, 3, 7, 10, 2, 5]
     //правильное решение - 0.5 балла
     public static void printArray(int[] array){
-        //Ваше решение здесь
+        System.out.println(Arrays.toString(array));
     }
 
     //вывести двойной массив на экран в виде:
@@ -66,7 +92,8 @@ public class Task1
     // ...
     //правильное решение - 0.5 балла
     public static void printArray(int[][] array){
-        //Ваше решение здесь
+        for(int[] subarray : array)
+            printArray(subarray);
     }
 
     //отсортировать одномерный массив в порядке возрастания
@@ -74,7 +101,15 @@ public class Task1
     //метод пузырька (один из самых простых для понимания)
     //правильный ответ - 1 балл
     public static int[] sort(int[] array){
-        //Ваше решение здесь
+        int len = array.length;
+        for(int i = 0; i < len - 1; i++)
+            for(int j = i + 1; j < len; j++) {
+                if(array[j] < array[i]){
+                    int t = array[j];
+                    array[j] = array[i];
+                    array[i] = t;
+                }
+            }
         return array;
     }
 
@@ -101,7 +136,7 @@ public class Task1
         printArray(sort(array1D));
 
         System.out.println("Вывод двумерного массива:");
-        int[][] array2D = {{1,5,3,7,10,2,5}, {1,5,3,7,10,2,5}};
+        int[][] array2D = {{1,5,3,7,10,2,5}, {1,5,3,7,10,2,5}, {2, 3, 5, 6}};
         printArray(array2D);
     }
 }
